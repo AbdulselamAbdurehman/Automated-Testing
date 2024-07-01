@@ -1,10 +1,8 @@
 import subprocess
 def main():
-
     
     with open('input.txt', 'r') as input_file:
         input_data = input_file.read().strip()
-
 
     process = subprocess.Popen(
         ['python', 'main.py'],
@@ -22,7 +20,6 @@ def main():
 
     with open('output.txt') as file:
         output = file.read()
-
 
     answers = output.strip().split('\n')
     output = stdout.strip().split('\n')
@@ -44,7 +41,6 @@ def main():
         print('All tests Passed')
     else:
         print(f'{passed}/{answer_lines} tests Passed')
-
 
 
 main()
