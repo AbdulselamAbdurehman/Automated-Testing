@@ -1,37 +1,50 @@
-"""
-steps:
-1.copy the given input into sample_in.txt
-2.copy the expected output for the sample testcases to sample_out.txt
-3.your solution should be written in a format specified in solution.py
-4.use find and replace shortcut to convert from "input" to "data.readline"
-5. for each test case(the for loop on the bottom), assign answers.readline() to a variable(e.g "expected")
-6. compare the expected result with your output and debug the result.
-7.Think for a moment and go to site and submit the "SOLUTION.PY"
-"""
-"""DO NOT FORGET TO USE CAST OPERATORS AND STRIP THE INPUT OFF WHITESPACE CHARACTERS WHEN NECESSARY"""
+import subprocess
+def main():
 
-data = open("sample_in.txt")
-answers = open("sample_out.txt")
-
-
-"""your function should process a single test case"""
-
-
-def write_a_solution_for_a_single_test_case():
-    """
-    :return should return the expected output: 
-    """
-    return "the expected output for this test case."
-
-
-number_of_test_cases = int(input())
-for test_num in range(number_of_test_cases):
-    output = write_a_solution_for_a_single_test_case()
-    expected = cast(answers.readline()) #DO NOT Forget to cast expected output since it only outputs strings.
-    if output == expected:
-        print(f"passed test{test_num")
-    else:
-        print(f"failed test{test_num} expected: {expected}, output: {output}")
     
-data.close()
-answers.close()
+    with open('input.txt', 'r') as input_file:
+        input_data = input_file.read().strip()
+
+
+    process = subprocess.Popen(
+        ['python', 'main.py'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+    stdout, stderr = process.communicate(input=input_data)
+ 
+    if stderr:
+        print(f"Error: {stderr}")
+        return
+
+    with open('output.txt') as file:
+        output = file.read()
+
+
+    answers = output.strip().split('\n')
+    output = stdout.strip().split('\n')
+
+    answer_lines, output_lines = len(answers), len(output)
+
+    if answer_lines != output_lines:
+        print(f"Your output is {output_lines} lines, but the expected is {answer_lines} lines.")
+        return
+
+    passed = 0
+    for i in range(answer_lines):
+        expected, found = answers[i], output[i]
+        if expected == found:
+            passed += 1
+        else:
+            print(f"Output line #{i+1}\nExpected: {expected}\nFound: {found}\n")
+    if passed == answer_lines:
+        print('All tests Passed')
+    else:
+        print(f'{passed}/{answer_lines} tests Passed')
+
+
+
+main()
