@@ -36,7 +36,7 @@ def main():
         if expected == found:
             passed += 1
         else:
-            print(f"Output line #{i+1}\nExpected: {expected}\nFound: {found}\n")
+            print(f"Output line # {i+1}\nExpected: {expected}\nFound: {found}\n")
     if passed == answer_lines:
         print('All tests Passed')
     else:
