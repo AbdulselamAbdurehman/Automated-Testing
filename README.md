@@ -1,3 +1,4 @@
+
 # Automated Testing Tool
 
 This project is designed to streamline the process of testing your code against expected outputs on competitive programming platforms such as Codeforces. It helps you manage bigger and multiple test cases efficiently and aids in debugging.
@@ -31,7 +32,8 @@ This project is designed to streamline the process of testing your code against 
    ```
 
 ### Note
-The handler script assumes that the first line of the input file contains the number of test cases. Comment out or remove the debugging prints before running the handler.
+* The handler script assumes that the first line of the input file contains the number of test cases. Comment out or remove the debugging prints before running the handler.
+* There should be only one valid output per test case. This means the handler will fail where there can be multiple valid answers and you are required to give just one among the possible.
 
 
 ## Debugging
